@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#9dbbe0">
+  <title>Invitación de Bautizo - Mateo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --azul: #9dbbe0;
+      --azul-medio: #7899c5;
+      --azul-oscuro: #496b9b;
+      --papel: #fbfaf6;
+      --tinta: #5878a4;
+      --sombra: 0 18px 38px rgba(48, 76, 112, .17);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--tinta);
+      background: var(--azul);
+      font-family: "Cormorant Garamond", Georgia, serif;
+      overflow-x: hidden;
+    }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    .page-shell { width: 100%; overflow: hidden; position: relative; }
+    
+    .section {
+      position: relative;
+      padding: 96px 20px 76px;
+      text-align: center;
+      overflow: hidden;
+    }
+    .eyebrow {
+      margin: 0 0 12px;
+      font: 500 10px/1.5 Montserrat, sans-serif;
+      letter-spacing: .28em;
+      text-transform: uppercase;
+      position: relative;
+      z-index: 2;
+    }
+    .script {
+      margin: 0;
+      font: 400 clamp(48px, 11vw, 78px)/1.1 "Great Vibes", cursive;
+      position: relative;
+      z-index: 2;
+    }
+    .serif-title {
+      margin: 8px 0 18px;
+      font: 600 clamp(26px, 6vw, 39px)/1.15 "Cormorant Garamond", serif;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      position: relative;
+      z-index: 2;
+    }
+    .body-copy {
+      max-width: 520px;
+      margin: 0 auto;
+      font: 400 16px/1.8 Montserrat, sans-serif;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Tarjetas principales con estilo de arco y espacio libre superior */
+    .paper-card {
+      position: relative;
+      z-index: 2;
+      max-width: 520px;
+      margin: 0 auto;
+      padding: clamp(78px, 14vw, 96px) clamp(26px, 6vw, 54px) clamp(54px, 8vw, 68px);
+      background: var(--papel);
+      border: 2px solid rgba(255, 255, 255, 0.9);
+      border-radius: 180px 180px 16px 16px;
+      box-shadow: var(--sombra);
+    }
+    
+    .paper-card::before, .paper-card::after {
+      content: "";
+      position: absolute;
+      width: 48px;
+      height: 48px;
+      background-size: contain;
+      background-repeat: no-repeat;
+      opacity: .85;
+      filter: brightness(1.1) drop-shadow(0 2px 4px rgba(0,0,0,0.05));
+      pointer-events: none;
+    }
+    .paper-card::before {
+      top: 26px;
+      left: 22px;
+      background-image: url('papel6.png');
+    }
+    .paper-card::after {
+      top: 26px;
+      right: 22px;
+      background-image: url('papel5.png');
+    }
+    .card-corner-bl, .card-corner-br {
+      position: absolute;
+      width: 48px;
+      height: 48px;
+      background-size: contain;
+      background-repeat: no-repeat;
+      opacity: .85;
+      filter: brightness(1.1);
+      pointer-events: none;
+      bottom: 16px;
+    }
+    .card-corner-bl {
+      left: 20px;
+      background-image: url('papel5.png');
+    }
+    .card-corner-br {
+      right: 20px;
+      background-image: url('papel6.png');
+    }
+
+    /* Guirnalda de Papel Picado Superior */
+    .papel-picado-guirnalda {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 56px;
+      background-image: url('papel.png');
+      background-repeat: repeat-x;
+      background-size: 80px 52px;
+      background-position: center top;
+      filter: brightness(0) invert(1) drop-shadow(0 3px 5px rgba(48, 76, 112, 0.2));
+      opacity: .92;
+      z-index: 3;
+      pointer-events: none;
+    }
+
+    /* Adornos de fondo Talavera */
+    .talavera-bg {
+      position: absolute;
+      width: 150px;
+      height: 150px;
+      background-size: contain;
+      background-repeat: no-repeat;
+      pointer-events: none;
+      z-index: 1;
+      filter: brightness(0) invert(1);
+      opacity: .14;
+    }
+    .talavera-bg.left-top { top: 60px; left: -30px; background-image: url('papel5.png'); }
+    .talavera-bg.right-bottom { bottom: 20px; right: -30px; background-image: url('papel6.png'); }
+    .talavera-bg.right-top { top: 60px; right: -30px; background-image: url('papel5.png'); }
+    .talavera-bg.left-bottom { bottom: 20px; left: -30px; background-image: url('papel6.png'); }
+
+    /* Divisor ornamental central con papel5.png */
+    .talavera-divider {
+      display: block;
+      width: 56px;
+      height: 56px;
+      margin: 22px auto;
+      background-image: url('papel5.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      position: relative;
+      z-index: 2;
+      filter: brightness(0) invert(1);
+      opacity: .9;
+    }
+    .white-section .talavera-divider {
+      filter: none;
+      opacity: .85;
+    }
+
+    .pill-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 12px 28px;
+      border: 1px solid rgba(255,255,255,.8);
+      border-radius: 999px;
+      background: var(--papel);
+      color: var(--azul-oscuro);
+      text-decoration: none;
+      font: 600 11px Montserrat, sans-serif;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      box-shadow: 0 8px 20px rgba(48,76,112,.10);
+      transition: transform .2s, box-shadow .2s;
+      position: relative;
+      z-index: 2;
+    }
+    .white-section .pill-button, .paper-card .pill-button {
+      background: var(--azul-oscuro);
+      color: var(--papel);
+    }
+    .pill-button:hover { transform: translateY(-2px); box-shadow: 0 12px 24px rgba(48,76,112,.16); }
+
+    /* Portada */
+    .cover {
+      min-height: 100svh;
+      display: grid;
+      place-items: center;
+      padding: 40px 18px;
+      background:
+        radial-gradient(circle at 50% 35%, rgba(255,255,255,.23), transparent 48%),
+        var(--azul);
+      isolation: isolate;
+      position: relative;
+      overflow: hidden;
+    }
+    .cover-inner {
+      position: relative;
+      z-index: 2;
+      width: min(100%, 520px);
+      padding: 72px 26px 58px;
+      text-align: center;
+      color: var(--papel);
+      border: 2px solid rgba(255,255,255,.8);
+      border-radius: 190px 190px 16px 16px;
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(4px);
+    }
+    .cover-inner .script { font-size: clamp(58px, 13vw, 92px); }
+    .cover-name {
+      margin: 12px 0 24px;
+      font: 600 clamp(30px, 8vw, 48px)/1.1 "Cormorant Garamond", serif;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+    .cover-subtitle { font: 400 11px Montserrat, sans-serif; letter-spacing: .3em; }
+    .cover-seal {
+      width: 76px;
+      height: 76px;
+      margin: 28px auto 0;
+      padding: 10px;
+      border: 1px solid rgba(255,255,255,.75);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+    }
+    .cover-seal img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      filter: brightness(0) invert(1);
+    }
+    .open-button {
+      margin-top: 32px;
+      padding: 14px 30px;
+      border: 0;
+      border-radius: 99px;
+      color: var(--azul-oscuro);
+      background: var(--papel);
+      font: 600 11px Montserrat, sans-serif;
+      letter-spacing: .13em;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(48,76,112,.15);
+    }
+    .cover.is-open { display: none; }
+
+    /* Botón flotante de música */
+    #audioControl {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 100;
+      background: var(--papel);
+      color: var(--azul-oscuro);
+      border: 1px solid rgba(255,255,255,.8);
+      border-radius: 50px;
+      padding: 10px 18px;
+      font: 600 10px Montserrat, sans-serif;
+      letter-spacing: .1em;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: transform .2s;
+    }
+    #audioControl:hover { transform: scale(1.05); }
+
+    /* Secciones */
+    .blue-section { color: var(--papel); background: var(--azul); }
+    .white-section { color: var(--tinta); background: var(--papel); }
+    .white-section .paper-card { color: var(--tinta); }
+    
+    .detail-line {
+      width: 72px;
+      height: 1px;
+      margin: 22px auto;
+      background: currentColor;
+      opacity: .45;
+    }
+    .names {
+      margin: 10px 0;
+      font-size: clamp(22px, 5vw, 32px);
+      line-height: 1.3;
+      position: relative;
+      z-index: 2;
+    }
+    .ampersand { margin: 2px 0; font: 400 24px "Great Vibes", cursive; position: relative; z-index: 2; }
+    
+    /* Itinerario Vertical Estilizado */
+    .itinerary-container {
+      max-width: 520px;
+      margin: 28px auto 0;
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .itinerary-item {
+      display: flex;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.4);
+      border: 1px solid rgba(120, 153, 197, 0.35);
+      padding: 18px 22px;
+      text-align: left;
+      gap: 18px;
+      border-radius: 12px;
+    }
+    .itinerary-time {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 26px;
+      font-weight: 600;
+      min-width: 85px;
+      color: var(--papel);
+      border-right: 1px solid rgba(255, 255, 255, 0.4);
+      padding-right: 15px;
+    }
+    .white-section .itinerary-item {
+      background: rgba(88, 120, 164, 0.04);
+      border-color: rgba(120, 153, 197, 0.2);
+    }
+    .white-section .itinerary-time {
+      color: var(--azul-oscuro);
+      border-right-color: rgba(73, 107, 155, 0.2);
+    }
+    .itinerary-details strong {
+      display: block;
+      font-size: 18px;
+      font-family: "Cormorant Garamond", serif;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      margin-bottom: 2px;
+      color: var(--papel);
+    }
+    .white-section .itinerary-details strong {
+      color: var(--tinta);
+    }
+    .itinerary-details span {
+      font: 11px/1.5 Montserrat, sans-serif;
+      opacity: .9;
+      color: var(--papel);
+    }
+    .white-section .itinerary-details span {
+      color: var(--tinta);
+      opacity: .8;
+    }
+
+    /* Cuenta Regresiva Estilizada */
+    .countdown {
+      display: flex;
+      justify-content: center;
+      gap: clamp(10px, 4vw, 25px);
+      margin: 24px auto;
+      position: relative;
+      z-index: 2;
+    }
+    .time-unit { min-width: 58px; text-align: center; }
+    .time-unit strong { display: block; font-size: clamp(28px, 6vw, 38px); font-weight: 500; }
+    .time-unit span { font: 9px Montserrat, sans-serif; letter-spacing: .12em; text-transform: uppercase; }
+    
+    .footer {
+      position: relative;
+      padding: 64px 20px 55px;
+      text-align: center;
+      color: var(--papel);
+      overflow: hidden;
+    }
+    .footer .script { font-size: 54px; }
+    .footer-talavera {
+      width: 48px;
+      height: 48px;
+      margin: 14px auto 0;
+      background-image: url('papel5.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      filter: brightness(0) invert(1);
+      opacity: .9;
+    }
+    .credit-link {
+      display: inline-block;
+      margin-top: 34px;
+      font: 400 10px/1.4 Montserrat, sans-serif;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: rgba(251, 250, 246, 0.72);
+      text-decoration: none;
+      transition: opacity .2s;
+    }
+    .credit-link:hover {
+      opacity: 1;
+      text-decoration: underline;
+    }
+    .sparkle { position: absolute; z-index: 2; color: rgba(255,255,255,.85); font-size: 20px; animation: twinkle 3s ease-in-out infinite; }
+    .sparkle.one { top: 20%; left: 10%; }
+    .sparkle.two { top: 55%; right: 9%; animation-delay: 1s; }
+    .sparkle.three { bottom: 14%; left: 16%; animation-delay: 2s; }
+    @keyframes twinkle { 0%,100% { opacity: .35; transform: scale(.8); } 50% { opacity: 1; transform: scale(1.15); } }
+    .fade-in { animation: appear .9s ease both; }
+    @keyframes appear { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+
+    @media (max-width: 480px) {
+      .section { padding: 80px 16px 64px; }
+      .paper-card {
+        padding: 84px 22px 48px;
+        border-radius: 130px 130px 14px 14px;
+      }
+      .paper-card::before, .paper-card::after {
+        width: 34px;
+        height: 34px;
+        top: 26px;
+      }
+      .paper-card::before { left: 16px; }
+      .paper-card::after { right: 16px; }
+      .card-corner-bl, .card-corner-br { width: 34px; height: 34px; }
+      .itinerary-item { padding: 14px 16px; gap: 12px; }
+      .itinerary-time { font-size: 22px; min-width: 70px; padding-right: 10px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Elemento de audio con chente.mp3 -->
+  <audio id="backgroundAudio" src="chente.mp3" loop preload="auto"></audio>
+  
+  <!-- Botón flotante para controlar la música -->
+  <button id="audioControl" style="display: none;" aria-label="Controlar música">
+    <span id="audioIcon">🎵</span> <span id="audioText">Música</span>
+  </button>
+
+  <main class="page-shell">
+    <!-- PORTADA -->
+    <section class="cover" id="portada">
+      <div class="papel-picado-guirnalda" aria-hidden="true"></div>
+      <span class="sparkle one">✧</span><span class="sparkle two">✦</span><span class="sparkle three">✧</span>
+      <div class="cover-inner fade-in">
+        <p class="cover-subtitle">CON LA BENDICIÓN DE DIOS</p>
+        <p class="script">Mi bautizo</p>
+        <h1 class="cover-name">Mateo</h1>
+        <p class="cover-subtitle">5 DE DICIEMBRE 2026</p>
+        <div class="cover-seal" aria-hidden="true">
+          <img src="papel5.png" alt="">
+        </div>
+        <button class="open-button" id="abrirInvitacion">ABRIR INVITACIÓN</button>
+      </div>
+    </section>
+
+    <!-- CONTENIDO -->
+    <div id="contenido" hidden>
+      
+      <!-- SECCIÓN 1: INTRODUCCIÓN CON CUENTA REGRESIVA ARRIBA -->
+      <section class="section blue-section">
+        <div class="papel-picado-guirnalda" aria-hidden="true"></div>
+        <div class="talavera-bg left-top" aria-hidden="true"></div>
+        <div class="talavera-bg right-bottom" aria-hidden="true"></div>
+        
+        <p class="eyebrow">Falta muy poco para celebrar</p>
+        <h2 class="script" style="font-size: clamp(40px, 9vw, 64px);">La cuenta regresiva</h2>
+        
+        <div class="countdown" id="cuentaRegresiva">
+          <div class="time-unit"><strong id="dias">00</strong><span>Días</span></div>
+          <div class="time-unit"><strong id="horas">00</strong><span>Horas</span></div>
+          <div class="time-unit"><strong id="minutos">00</strong><span>Minutos</span></div>
+          <div class="time-unit"><strong id="segundos">00</strong><span>Segundos</span></div>
+        </div>
+
+        <div class="talavera-divider" aria-hidden="true" style="margin: 20px auto;"></div>
+
+        <p class="eyebrow" style="margin-top: 10px;">Un día lleno de amor y bendiciones</p>
+        <h2 class="script">Con alegría</h2>
+        <p class="body-copy">Damos gracias a Dios por la vida de nuestro pequeño y queremos compartir contigo la alegría de recibir este sacramento.</p>
+      </section>
+
+      <!-- SECCIÓN 2: DATOS PRINCIPALES -->
+      <section class="section white-section">
+        <div class="papel-picado-guirnalda" aria-hidden="true"></div>
+        <div class="talavera-bg right-top" aria-hidden="true"></div>
+        <div class="talavera-bg left-bottom" aria-hidden="true"></div>
+        
+        <div class="paper-card">
+          <span class="card-corner-bl" aria-hidden="true"></span>
+          <span class="card-corner-br" aria-hidden="true"></span>
+          <p class="eyebrow">Con la compañía de nuestros seres queridos</p>
+          <h2 class="script">Tenemos el honor</h2>
+          <p class="body-copy">de invitarte a celebrar el bautizo de</p>
+          <h2 class="serif-title" style="margin-top:20px">Mateo</h2>
+          <div class="detail-line"></div>
+          <p class="body-copy">Un día especial que quedará guardado para siempre en nuestros corazones.</p>
+          <div class="talavera-divider" style="background-image: url('papel6.png');" aria-hidden="true"></div>
+          <p class="eyebrow">Fecha de la celebración</p>
+          <p class="names">5 de Diciembre · 2026</p>
+          <p class="body-copy">A las 13:00 hrs</p>
+        </div>
+      </section>
+
+      <!-- SECCIÓN 3: FAMILIA Y PADRINOS -->
+      <section class="section blue-section">
+        <div class="papel-picado-guirnalda" aria-hidden="true"></div>
+        <div class="talavera-bg left-top" aria-hidden="true"></div>
+        <div class="talavera-bg right-bottom" aria-hidden="true"></div>
+        
+        <p class="eyebrow">Con mucho cariño</p>
+        <h2 class="script">Mis papás</h2>
+        <p class="names">Daniela Ruiz y Carlos Mendoza</p>
+        <div class="detail-line"></div>
+        <p class="eyebrow">Quienes me acompañan en este camino</p>
+        <h2 class="script">Mis padrinos</h2>
+        <p class="names">Fernanda López</p>
+        <p class="ampersand">&</p>
+        <p class="names">Diego Torres</p>
+        
+        <div class="talavera-divider" aria-hidden="true"></div>
+      </section>
+
+      <!-- SECCIÓN 4: UBICACIONES DE MISA Y RECEPCIÓN -->
+      <section class="section white-section">
+        <div class="papel-picado-guirnalda" aria-hidden="true"></div>
+        <div class="talavera-bg right-top" aria-hidden="true"></div>
+        <div class="talavera-bg left-bottom" aria-hidden="true"></div>
+        
+        <p class="eyebrow">Ubicaciones principales</p>
+        <h2 class="script" style="margin-bottom: 24px;">Ceremonia y Recepción</h2>
+
+        <div style="display: flex; flex-direction: column; gap: 24px; max-width: 520px; margin: 0 auto;">
+          <!-- Misa -->
+          <div class="paper-card" style="width: 100%; margin: 0;">
+            <span class="card-corner-bl" aria-hidden="true"></span>
+            <span class="card-corner-br" aria-hidden="true"></span>
+            <p class="eyebrow">Ceremonia Religiosa</p>
+            <p class="serif-title" style="font-size: 22px; margin: 10px 0;">Templo de Santa Clara</p>
+            <p class="body-copy">Calle Jacarandas 245, Col. Las Flores, Morelia, Michoacán.</p>
+            <p class="names" style="margin: 15px 0 20px;">13:00 hrs</p>
+            <a class="pill-button" href="https://www.google.com/maps/search/?api=1&query=Templo+de+Santa+Clara%2C+Calle+Jacarandas+245%2C+Colonia+Las+Flores%2C+Morelia%2C+Michoac%C3%A1n" target="_blank" rel="noopener">Ver Ubicación Templo</a>
+          </div>
+
+          <!-- Recepción -->
+          <div class="paper-card" style="width: 100%; margin: 0;">
+            <span class="card-corner-bl" aria-hidden="true"></span>
+            <span class="card-corner-br" aria-hidden="true"></span>
+            <p class="eyebrow">Fiesta</p>
+            <p class="serif-title" style="font-size: 22px; margin: 10px 0;">Salón Los Olivos</p>
+            <p class="body-copy">Av. del Lago 180, Col. Jardines del Sol, Morelia, Michoacán.</p>
+            <p class="names" style="margin: 15px 0 20px;">16:00 hrs</p>
+            <a class="pill-button" href="https://www.google.com/maps/search/?api=1&query=Sal%C3%B3n+Los+Olivos%2C+Avenida+del+Lago+180%2C+Colonia+Jardines+del+Sol%2C+Morelia%2C+Michoac%C3%A1n" target="_blank" rel="noopener">Ver Ubicación Salón</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECCIÓN 5: ITINERARIO VERTICAL -->
+      <section class="section blue-section">
+        <div class="papel-picado-guirnalda" aria-hidden="true"></div>
+        <div class="talavera-bg left-top" aria-hidden="true"></div>
+        <div class="talavera-bg right-bottom" aria-hidden="true"></div>
+        
+        <p class="eyebrow">Programa del día</p>
+        <h2 class="script">Itinerario</h2>
+        
+        <div class="itinerary-container">
+          <div class="itinerary-item">
+            <div class="itinerary-time">13:00</div>
+            <div class="itinerary-details">
+              <strong>Misa</strong>
+              <span>Ceremonia religiosa en la Templo de Santa Clara</span>
+            </div>
+          </div>
+          <div class="itinerary-item">
+            <div class="itinerary-time">16:00</div>
+            <div class="itinerary-details">
+              <strong>Recepción</strong>
+              <span>Llegada de invitados al salón</span>
+            </div>
+          </div>
+          <div class="itinerary-item">
+            <div class="itinerary-time">17:00</div>
+            <div class="itinerary-details">
+              <strong>Comida</strong>
+              <span>Disfrutaremos de un gran banquete juntos</span>
+            </div>
+          </div>
+          <div class="itinerary-item">
+            <div class="itinerary-time">19:00</div>
+            <div class="itinerary-details">
+              <strong>Música</strong>
+              <span>Inicio de música y ambiente familiar</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="talavera-divider" aria-hidden="true"></div>
+      </section>
+
+      <!-- SECCIÓN 6: SUGERENCIA DE REGALOS -->
+      <section class="section white-section">
+        <div class="papel-picado-guirnalda" aria-hidden="true"></div>
+        <div class="talavera-bg right-top" aria-hidden="true"></div>
+        
+        <div class="paper-card">
+          <span class="card-corner-bl" aria-hidden="true"></span>
+          <span class="card-corner-br" aria-hidden="true"></span>
+          <p class="eyebrow">Mesa de Regalos / Sugerencia</p>
+          <h2 class="script">Un detalle para mí</h2>
+          <p class="body-copy" style="margin-top: 15px;">Tu presencia es tu mejor regalo, pero si deseas obsequiarme algo será muy agradecido.</p>
+          <p class="body-copy" style="margin-top: 12px; font-style: italic;">Si tu idea es ropita puede ser a partir de talla 3 - 12 meses. ¡Gracias con mucho cariño!</p>
+        </div>
+      </section>
+
+      <!-- SECCIÓN 7: CONFIRMACIÓN DE ASISTENCIA -->
+      <section class="section blue-section">
+        <div class="papel-picado-guirnalda" aria-hidden="true"></div>
+        <div class="talavera-bg left-top" aria-hidden="true"></div>
+        <div class="talavera-bg right-bottom" aria-hidden="true"></div>
+        
+        <p class="eyebrow">Tu presencia es nuestro mejor regalo</p>
+        <h2 class="script">Confirma tu asistencia</h2>
+        <p class="body-copy">Ayúdanos confirmando si nos acompañarás en este día tan especial de Mateo.</p>
+        <div style="height:24px"></div>
+        <a class="pill-button" id="confirmarWhatsApp" href="#" target="_blank" rel="noopener">Confirmar por WhatsApp</a>
+      </section>
+
+      <footer class="footer">
+        <p class="script">¡Te esperamos!</p>
+        <p class="eyebrow">Con cariño, Daniela, Carlos y Mateo</p>
+        <div class="footer-talavera" aria-hidden="true"></div>
+        <div>
+          <a class="credit-link" href="https://www.facebook.com/profile.php?id=61575459699823" target="_blank" rel="noopener">Invitación hecha por Invitaciones Kiki</a>
+        </div>
+      </footer>
+    </div>
+  </main>
+
+  <script>
+    /* CONFIGURACIÓN DE FECHA Y WHATSAPP */
+    const CONFIG = {
+      fechaEvento: "2026-12-05T13:00:00",
+      telefonoWhatsApp: "524430000000",
+      mensajeWhatsApp: "¡Hola! Confirmo mi asistencia al bautizo de Mateo."
+    };
+
+    const portada = document.getElementById("portada");
+    const contenido = document.getElementById("contenido");
+    const audio = document.getElementById("backgroundAudio");
+    const audioControl = document.getElementById("audioControl");
+    const audioIcon = document.getElementById("audioIcon");
+    const audioText = document.getElementById("audioText");
+
+    document.getElementById("abrirInvitacion").addEventListener("click", () => {
+      portada.classList.add("is-open");
+      contenido.hidden = false;
+      window.scrollTo({ top: 0, behavior: "smooth" });
+
+      // Reproducir audio chente.mp3
+      audio.play().then(() => {
+        audioControl.style.display = "flex";
+      }).catch(err => {
+        console.log("Reproducción automática bloqueada por el navegador:", err);
+        audioControl.style.display = "flex";
+        audioIcon.textContent = "🔇";
+        audioText.textContent = "Play";
+      });
+    });
+
+    // Control manual del botón flotante de música
+    audioControl.addEventListener("click", () => {
+      if (audio.paused) {
+        audio.play();
+        audioIcon.textContent = "🎵";
+        audioText.textContent = "Música";
+      } else {
+        audio.pause();
+        audioIcon.textContent = "🔇";
+        audioText.textContent = "Pausa";
+      }
+    });
+
+    const destino = new Date(CONFIG.fechaEvento).getTime();
+    function actualizarCuenta() {
+      const diferencia = destino - Date.now();
+      const ids = ["dias", "horas", "minutos", "segundos"];
+      if (diferencia <= 0) {
+        document.getElementById("cuentaRegresiva").innerHTML = "<p class='body-copy'>¡Hoy es el gran día de Mateo!</p>";
+        return;
+      }
+      const valores = [
+        Math.floor(diferencia / 86400000),
+        Math.floor((diferencia % 86400000) / 3600000),
+        Math.floor((diferencia % 3600000) / 60000),
+        Math.floor((diferencia % 60000) / 1000)
+      ];
+      ids.forEach((id, i) => document.getElementById(id).textContent = String(valores[i]).padStart(2, "0"));
+    }
+    actualizarCuenta();
+    setInterval(actualizarCuenta, 1000);
+
+    const enlaceWhatsApp = "https://wa.me/" + CONFIG.telefonoWhatsApp +
+      "?text=" + encodeURIComponent(CONFIG.mensajeWhatsApp);
+    document.getElementById("confirmarWhatsApp").href = enlaceWhatsApp;
+  </script>
+</body>
+</html>
